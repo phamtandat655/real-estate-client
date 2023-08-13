@@ -1,48 +1,58 @@
-import React from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { housesData } from '../data';
+// import { housesData } from '../data';
+import axios from 'axios';
 
 const PropertyDetails = () => {
     const { id } = useParams();
+    const [house, setHouse] = useState(null);
 
-    const house = housesData.find((house) => house.id === parseInt(id));
+    // const house = housesData.find((house) => house?.id === parseInt(id));
+    useEffect(() => {
+        axios.get(`http://localhost:4000/property/${id}`).then((res) => setHouse(res.data));
+    }, [id]);
 
     return (
         <div className="grid md:grid-cols-3 md:px-20 bg-white pb-10 p-3">
             <div className="md:col-span-2">
                 <div className="flex justify-between items-center my-2">
                     <div>
-                        <h3 className="font-semibold">{house.name}</h3>
-                        <p>{house.address}</p>
+                        <h3 className="font-semibold">{house?.name}</h3>
+                        <p>{house?.address}</p>
                     </div>
                     <div>
-                        <span className="mx-3 text-xs bg-cyan-300 text-white px-1 rounded-full">{house.type}</span>
-                        <span className="text-xs bg-secondary text-white px-1 rounded-full">{house.country}</span>
+                        <span className="mx-3 text-xs bg-cyan-300 text-white px-1 rounded-full">{house?.type}</span>
+                        <span className="text-xs bg-secondary text-white px-1 rounded-full">{house?.country}</span>
                     </div>
                 </div>
 
-                <div>
-                    <img className="rounded-md" src={house.imageLg} alt="img large" />
+                <div className="flex justify-center my-5">
+                    <img
+                        className="rounded-md max-h-96"
+                        crossOrigin="anonymous"
+                        src={`http://localhost:4000/assets${house?.image}`}
+                        alt="img large"
+                    />
                 </div>
                 <div className="mt-4 mb-2">
                     <span className="mr-2">
-                        <i className="fa-solid fa-bed"></i> {house.bedrooms}
+                        <i className="fa-solid fa-bed"></i> {house?.bedrooms}
                     </span>
                     <span className="mx-2">
-                        <i className="fa-solid fa-bath"></i> {house.bathrooms}
+                        <i className="fa-solid fa-bath"></i> {house?.bathrooms}
                     </span>
                     <span className="mx-2">
-                        <i className="fa-solid fa-arrows-up-down-left-right"></i> {house.surface}
+                        <i className="fa-solid fa-arrows-up-down-left-right"></i> {house?.surface}
                     </span>
                 </div>
 
                 <div>
-                    <p>{house.description}</p>
+                    <p>{house?.description}</p>
                 </div>
             </div>
             <div className="md:col-span-1 w-full md:mx-6">
                 <div className="text-right md:mr-10">
-                    <p className="mb-1 p-3 text-2xl font-semibold text-secondary">${house.price}</p>
+                    <p className="mb-1 p-3 text-2xl font-semibold text-secondary">${house?.price}</p>
                 </div>
                 <div className="px-3 py-5 border">
                     <input className="w-full px-2 py-4 border my-2 outline-none" type="text" placeholder="Name" />
@@ -63,4 +73,4 @@ const PropertyDetails = () => {
     );
 };
 
-export default PropertyDetails;
+export default memo(PropertyDetails);

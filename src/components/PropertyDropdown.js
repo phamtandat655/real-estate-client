@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 
 import { RiHome5Line, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 
@@ -46,4 +46,4 @@ const PropertyDropdown = () => {
     );
 };
 
-export default PropertyDropdown;
+export default memo(PropertyDropdown);

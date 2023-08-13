@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 
 import { RiWallet3Line, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 
@@ -64,4 +64,4 @@ const PriceRangeDropdown = () => {
     );
 };
 
-export default PriceRangeDropdown;
+export default memo(PriceRangeDropdown);

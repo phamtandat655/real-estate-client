@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 
 import CountryDropdown from './CountryDropdown';
 import PropertyDropdown from './PropertyDropdown';
@@ -29,4 +29,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default memo(Search);

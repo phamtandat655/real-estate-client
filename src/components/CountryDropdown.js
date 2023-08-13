@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { memo, useContext, useState } from 'react';
 
 import { RiMapPinLine, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 
@@ -46,4 +46,4 @@ const CountryDropdown = () => {
     );
 };
 
-export default CountryDropdown;
+export default memo(CountryDropdown);
